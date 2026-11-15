@@ -1,0 +1,33 @@
+#api call for registor
+
+###
+POST http://127.0.0.1:8000/accounts/register/
+Content-Type: application/json
+
+{
+    "username" : "nasna",
+    "password" : "nasna@123",
+    "phone" : "8765432189",
+    "dob" :"1998-08-31",
+    "height" : "145",
+    "weight" : "45"
+}
+
+#=================foodlog==============
+###
+GET http://127.0.0.1:8000/foodlog/
+Accept: application/json
+Authorization: Basic nasna:nasna@123
+
+#api call for create foodlog
+###
+POST http://127.0.0.1:8000/foodlog/
+Content-Type:  application/json
+Authorization: Basic nasna:nasna@123
+
+{
+    "title" : "dosha",
+    "meal_type" : "breakfast",
+    "serving_size" : "2",
+    "calorie" : 120
+}
