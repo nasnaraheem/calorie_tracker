@@ -5,10 +5,10 @@ POST http://127.0.0.1:8000/accounts/register/
 Content-Type: application/json
 
 {
-    "username" : "nasna",
-    "password" : "nasna@123",
-    "phone" : "8765432189",
-    "dob" :"1998-08-31",
+    "username" : "dua",
+    "password" : "dua@123",
+    "phone" : "8765433289",
+    "dob" :"2024-07-19",
     "height" : "145",
     "weight" : "45"
 }
@@ -23,11 +23,45 @@ Authorization: Basic nasna:nasna@123
 ###
 POST http://127.0.0.1:8000/foodlog/
 Content-Type:  application/json
-Authorization: Basic nasna:nasna@123
+Authorization: Basic dua:dua@123
 
 {
-    "title" : "dosha",
-    "meal_type" : "breakfast",
-    "serving_size" : "2",
-    "calorie" : 120
+    "title" : "tea",
+    "meal_type" : "tea",
+    "serving_size" : "1",
+    "calorie" : 80
 }
+
+#api call for fetching details
+###
+GET http://127.0.0.1:8000/foodlog/3/
+Accept: application/json
+Authorization: Basic dua:dua@123
+
+#api call for update
+###
+PUT http://127.0.0.1:8000/foodlog/3/
+Content-Type: application/json
+Authorization: Basic dua:dua@123
+
+{
+    
+  "title": "meals",
+  "meal_type": "lunch",
+  "serving_size": "1",
+  "food_image": null,
+  "calorie": 200.0,
+  "created_at": "2026-11-16T14:11:31.410819Z",
+  "owner": 2
+}
+
+#api call for delete
+###
+DELETE http://127.0.0.1:8000/foodlog/2/
+Authorization: Basic nasna:nasna@123
+
+#============summary==============
+
+###
+GET http://127.0.0.1:8000/summary/
+Accept: application/json
