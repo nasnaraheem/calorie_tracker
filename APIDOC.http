@@ -13,36 +13,48 @@ Content-Type: application/json
     "weight" : "45"
 }
 
+#========token===========
+
+###
+POST http://127.0.0.1:8000/token/
+Content-Type: application/json
+
+{
+    "username" : "nasna",
+    "password" : "nasna@123"
+}
+
 #=================foodlog==============
 ###
 GET http://127.0.0.1:8000/foodlog/
 Accept: application/json
-Authorization: Basic nasna:nasna@123
+Authorization: Token 07844cee324b75ae86b0561aef91cfda5db7a732
 
 #api call for create foodlog
 ###
 POST http://127.0.0.1:8000/foodlog/
 Content-Type:  application/json
-Authorization: Basic dua:dua@123
+Authorization: Token 07844cee324b75ae86b0561aef91cfda5db7a732
 
 {
-    "title" : "tea",
-    "meal_type" : "tea",
+    "title" : "snack",
+    "meal_type" : "snack",
     "serving_size" : "1",
-    "calorie" : 80
+    "calorie" : 100
 }
 
 #api call for fetching details
 ###
 GET http://127.0.0.1:8000/foodlog/3/
 Accept: application/json
-Authorization: Basic dua:dua@123
+Authorization: Token 07844cee324b75ae86b0561aef91cfda5db7a732
 
 #api call for update
 ###
 PUT http://127.0.0.1:8000/foodlog/3/
 Content-Type: application/json
-Authorization: Basic dua:dua@123
+Authorization:  Token 07844cee324b75ae86b0561aef91cfda5db7a732
+
 
 {
     
@@ -58,10 +70,12 @@ Authorization: Basic dua:dua@123
 #api call for delete
 ###
 DELETE http://127.0.0.1:8000/foodlog/2/
-Authorization: Basic nasna:nasna@123
+Authorization:  Token 07844cee324b75ae86b0561aef91cfda5db7a732
+
 
 #============summary==============
 
 ###
 GET http://127.0.0.1:8000/summary/
 Accept: application/json
+Authorization:  Token 07844cee324b75ae86b0561aef91cfda5db7a732

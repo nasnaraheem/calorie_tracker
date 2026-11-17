@@ -11,7 +11,8 @@ from django.db.models import Sum
 # Create your views here.
 class FoodlogListCreateView(APIView):
 
-    authentication_classes=[authentication.BasicAuthentication]
+    #authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
 
     def get(self,request):
@@ -35,7 +36,8 @@ class FoodlogListCreateView(APIView):
 
 class FoodlogRetreiveUpdateDeleteView(APIView):
 
-   authentication_classes=[authentication.BasicAuthentication]
+   #authentication_classes=[authentication.BasicAuthentication]
+   authentication_classes=[authentication.TokenAuthentication]
    permission_classes=[IsOwner]
 
    def get(self,request,pk=None):
@@ -69,7 +71,8 @@ class FoodlogRetreiveUpdateDeleteView(APIView):
 
 class FoodlogSummeryView(APIView):
 
-   authentication_classes=[authentication.BasicAuthentication]
+   #authentication_classes=[authentication.BasicAuthentication]
+   authentication_classes=[authentication.TokenAuthentication]
    permission_classes=[permissions.IsAuthenticated]
 
    def get(self,request):
@@ -81,9 +84,16 @@ class FoodlogSummeryView(APIView):
          "monthly_total" : 0
       }
       cur_date=datetime.today().date()
-      todays_total=get_user_calorie.filter(created_at__date=cur_date).values("calorie").aggregate(total=sum("calorie")).get("total")
+      todays_total_calorie=get_user_calorie.filter(created_at__date=cur_date).values("calorie").aggregate(total=Sum("calorie")).get("total")
 
-      response_data=["todays_total"]=todays_total
+      response_data["todays_total"]=todays_total_calorie
+
+      cur_month=datetime.today().month
+      cur_year=datetime.today().year
+
+      monthly_total_calorie=get_user_calorie.filter(created_at__month=cur_month,created_at__year=cur_year).values("calorie").aggregate(total=Sum("calorie")).get("total")
+
+      response_data["monthly_total"]=monthly_total_calorie
 
       return Response(response_data)
 
